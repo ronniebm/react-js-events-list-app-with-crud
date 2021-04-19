@@ -1,0 +1,60 @@
+.toolbar {
+  margin-top: -10px;
+  margin-bottom: 25px;
+  height: 115px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+
+  &__wrapper {
+    position: fixed;
+    width: 100%;
+    height: 115px;
+    padding: 10px 20px 0px 40px;
+    background-color: rgb(216, 231, 226);
+    z-index: 100;
+  }
+  &__title {
+    color: rgb(19, 58, 34);
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    &__button {
+      height: 41px;
+      width: 50px;
+      font-size: 20px;
+      margin-right: 15px;
+      border-radius: 4px;
+      font-weight: bold;
+      background-color: green;
+      color: white;
+      border: none;
+    }
+    &__search {
+      height: 32px;
+      width: calc(#{100%} - 105px);
+      font-size: 19px;
+      outline: none;
+      border-radius: 4px;
+      border: 1px solid lightgray;
+      padding-left: 10px;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+
+  .toolbar {
+    &__container {
+      &__search {
+        height: 38px;
+      }
+    }
+  }
+
+}
