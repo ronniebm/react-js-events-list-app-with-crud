@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { InsertData } from './components/InsertData';
 import { EditData } from './components/EditData';
+import { DeleteData } from './components/DeleteData';
 import { Card } from './components/Card';
 import { EventToolBar } from './components/EventToolBar';
 import './styles/App.css';
@@ -15,6 +16,7 @@ export const App = () => {
   const [data, setData] = useState([]);
   const [insertMenu, setInsertMenu] = useState(false);
   const [editMenu, setEditMenu] = useState(false);
+  const [deleteMenu, setDeleteMenu] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     id: '',
     name: '',
@@ -68,6 +70,15 @@ export const App = () => {
     })
   }
 
+  // DELETE request.
+  const deleteRequest = async () => {
+    await axios.delete(baseUrl + eventSelected.id)
+    .then(response => {
+      setData(data.filter(obj => obj.id !== eventSelected.id))
+      openCloseDeleteData()
+    })
+  }
+
   const openCloseInsertData = () => {
     setInsertMenu(!insertMenu);
   }
@@ -76,18 +87,25 @@ export const App = () => {
     setEditMenu(!editMenu);
   }
 
+  const openCloseDeleteData = () => {
+    setDeleteMenu(!deleteMenu);
+  }
+
   const selectEvent = (theEvent, mode) => {
     setEventSelected(theEvent);
-    (mode === 'edit') && setEditMenu(true);
+    (mode === 'edit') ? openCloseEditData() : openCloseDeleteData();
   };
 
   useEffect( () => {
     getRequest();
   },[])
 
+
   return (
     <div className="app">
+
       <EventToolBar openCloseInsertData={openCloseInsertData} />
+
       {
         insertMenu ? <InsertData
                         openCloseInsertData={openCloseInsertData}
@@ -95,6 +113,7 @@ export const App = () => {
                         postRequest={postRequest}
                      /> : null
       }
+
       {
         editMenu ? <EditData
                       openCloseEditData={openCloseEditData}
@@ -103,12 +122,22 @@ export const App = () => {
                       eventSelected={eventSelected}
                    /> : null
       }
+
+      {
+        deleteMenu ? <DeleteData
+                      openCloseDeleteData={openCloseDeleteData}
+                      deleteRequest={deleteRequest}
+                      eventSelected={eventSelected}
+                   /> : null
+      }
+
       {data.map(obj => (
         <Card 
           key={obj.id}
           name={obj.name} location={obj.location} hostname={obj.hostname}
           type={obj.type} date={obj.date} obj={obj} selectEvent={selectEvent} 
-          openCloseEditData={openCloseEditData}/>
+          openCloseEditData={openCloseEditData}
+          openCloseDeleteData={openCloseDeleteData}/>
       ))}
 
     </div>

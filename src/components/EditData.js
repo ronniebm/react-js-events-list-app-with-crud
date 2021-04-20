@@ -4,7 +4,7 @@ import '../styles/EditData.css'
 export const EditData = ({openCloseEditData, handleChange, putRequest, eventSelected}) => {
   return (
     <div className="edit-fields">
-      <div className="edit-fields__wrapper" paddingTop="0">
+      <div className="edit-fields__wrapper">
         <h3>Edit the event</h3>
         <div><input onChange={handleChange} className="edit-fields__all edit-fields__name" type="text" name="name" placeholder="Event name" value={eventSelected && eventSelected.name}/></div>
         <div><input onChange={handleChange} className="edit-fields__all edit-fields__location" type="text" name="location" placeholder="Location" value={eventSelected && eventSelected.location}/></div>
