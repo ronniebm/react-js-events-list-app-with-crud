@@ -56,6 +56,11 @@ $card-public: teal;
       color: teal;
       background-color: lighten($color: teal, $amount: 72);
       font-weight: 500;
+      cursor: pointer;
+      &:hover {
+        background-color: green;
+        color: white;
+      }
     }
     &__delete {
       margin-right: 15px;

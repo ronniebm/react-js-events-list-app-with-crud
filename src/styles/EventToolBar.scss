@@ -33,6 +33,11 @@
       background-color: green;
       color: white;
       border: none;
+      cursor: pointer;
+      &:hover {
+        background-color: yellowgreen;
+        color: green;
+      }
     }
     &__search {
       height: 32px;

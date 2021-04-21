@@ -60,6 +60,12 @@
   color: teal;
   background-color: azure;
   font-weight: 500;
+  cursor: pointer;
+}
+
+.card__footer__delete:hover, .card__footer__edit:hover {
+  background-color: green;
+  color: white;
 }
 
 .card__footer__delete {

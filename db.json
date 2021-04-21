@@ -2,7 +2,7 @@
   "events": [
     {
       "id": 1,
-      "name": "Transportation/Trucking/Railroad",
+      "name": "Transportation/Trucking/Railroad ron",
       "location": "03936 Kuhlman Field",
       "hostname": "Joseph Reichel",
       "type": "private",
@@ -786,7 +786,7 @@
     },
     {
       "id": 99,
-      "name": "Staffing & Recruiting",
+      "name": "Staffing & Recruiting 3243255",
       "location": "6110 Schiller Alley",
       "hostname": "Kim Kirlin",
       "type": "public",

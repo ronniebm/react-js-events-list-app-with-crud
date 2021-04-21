@@ -38,6 +38,12 @@
   background-color: green;
   color: white;
   border: none;
+  cursor: pointer;
+}
+
+.toolbar__container__button:hover {
+  background-color: yellowgreen;
+  color: green;
 }
 
 .toolbar__container__search {

@@ -53,20 +53,18 @@ export const App = () => {
 
   // PUT request.
   const putRequest = async () => {
+    //setstate para activar spinner
     await axios.put(baseUrl + eventSelected.id, eventSelected)
     .then(response => {
-      var newData = data;
-      newData.map(obj => {
+      var newData = data.map(obj => {
         if(eventSelected.id === obj.id) {
-          obj.name = eventSelected.name;
-          obj.location = eventSelected.location;
-          obj.hostname = eventSelected.hostname;
-          obj.type = eventSelected.type;
-          obj.date = eventSelected.date;
+          obj = {...response.data};
         }
+        return obj;
       })
       setData(newData);
       openCloseEditData();
+      //set state apagar spinner
     })
   }
 
