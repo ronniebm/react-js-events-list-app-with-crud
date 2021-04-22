@@ -13,8 +13,8 @@ import axios from 'axios';
 import './styles/App.css';
 
 
-// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-const baseUrl = `http://localhost:3001/events/`;
+const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+// const baseUrl = `http://localhost:3001/events/`;
 
 
 export const App = () => {
@@ -34,10 +34,7 @@ export const App = () => {
 
   const handleChange = e => {
     const {name, value} = e.target;
-    setEventSelected(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
+    setEventSelected( prevState => ({...prevState, [name]: value}) )
   }
 
   // GET request.
@@ -140,7 +137,7 @@ export const App = () => {
                 putRequest={putRequest}
                 eventSelected={eventSelected}
                 setEventSelected={setEventSelected}
-                data={data}
+                data={data} 
             />
           </Route>
 
