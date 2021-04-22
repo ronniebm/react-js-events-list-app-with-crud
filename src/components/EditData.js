@@ -2,11 +2,13 @@ import React from 'react';
 import {Link, useParams} from 'react-router-dom';
 import '../styles/EditData.css'
 
-export const EditData = ({openCloseEditData, handleChange, putRequest, eventSelected, data}) => {
+export const EditData = ({openCloseEditData, handleChange, putRequest, eventSelected, setEventSelected, data}) => {
   let eventId = Number(useParams().eventId);
   if(eventSelected.id === ''){
-    eventSelected = data[eventId - 1];
+    setEventSelected(data[eventId - 1]);
   }
+  console.log(eventSelected);
+  
   return (
     <div className="edit-fields">
       <div className="edit-fields__wrapper">

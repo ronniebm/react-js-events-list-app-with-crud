@@ -13,7 +13,7 @@ import axios from 'axios';
 import './styles/App.css';
 
 
-const baseUrl = `http://localhost:3001/events/`;
+const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
 
 
 export const App = () => {
@@ -138,6 +138,7 @@ export const App = () => {
                 handleChange={handleChange}
                 putRequest={putRequest}
                 eventSelected={eventSelected}
+                setEventSelected={setEventSelected}
                 data={data}
             />
           </Route>
