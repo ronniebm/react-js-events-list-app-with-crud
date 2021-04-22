@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 import { InsertData } from './components/InsertData';
 import { EditData } from './components/EditData';
 import { DeleteData } from './components/DeleteData';
 import { Card } from './components/Card';
 import { EventToolBar } from './components/EventToolBar';
-import './styles/App.css';
 import axios from 'axios';
+import './styles/App.css';
 
 
 const baseUrl = `http://localhost:3001/events/`;
@@ -98,46 +103,65 @@ export const App = () => {
     getRequest();
   },[])
 
-
   return (
-    <div className="app">
+    <Router>
 
-      <EventToolBar openCloseInsertData={openCloseInsertData} />
+      <div className="app">
 
-      {
-        insertMenu ? <InsertData
-                        openCloseInsertData={openCloseInsertData}
-                        handleChange={handleChange}
-                        postRequest={postRequest}
-                     /> : null
-      }
+        {
+          insertMenu ? <InsertData
+                          openCloseInsertData={openCloseInsertData}
+                          handleChange={handleChange}
+                          postRequest={postRequest}
+                      /> : null
+        }
 
-      {
-        editMenu ? <EditData
-                      openCloseEditData={openCloseEditData}
-                      handleChange={handleChange}
-                      putRequest={putRequest}
-                      eventSelected={eventSelected}
-                   /> : null
-      }
+        {
+          deleteMenu ? <DeleteData
+                        openCloseDeleteData={openCloseDeleteData}
+                        deleteRequest={deleteRequest}
+                        eventSelected={eventSelected}
+                    /> : null
+        }
 
-      {
-        deleteMenu ? <DeleteData
-                      openCloseDeleteData={openCloseDeleteData}
-                      deleteRequest={deleteRequest}
-                      eventSelected={eventSelected}
-                   /> : null
-      }
+        
 
-      {data.map(obj => (
-        <Card 
-          key={obj.id}
-          name={obj.name} location={obj.location} hostname={obj.hostname}
-          type={obj.type} date={obj.date} obj={obj} selectEvent={selectEvent} 
-          openCloseEditData={openCloseEditData}
-          openCloseDeleteData={openCloseDeleteData}/>
-      ))}
+        <Switch>
 
-    </div>
+          <Route path="/create">
+            ...
+          </Route>
+
+          <Route path="/edit/:eventId">
+            <EditData
+                openCloseEditData={openCloseEditData}
+                handleChange={handleChange}
+                putRequest={putRequest}
+                eventSelected={eventSelected}
+                data={data}
+            />
+          </Route>
+
+          <Route path="/delete">
+            ...
+          </Route>
+
+          <Route exact ={true} path="/">
+
+            <EventToolBar openCloseInsertData={openCloseInsertData} />
+            {data.map(obj => (
+            <Card 
+              key={obj.id}
+              name={obj.name} location={obj.location} hostname={obj.hostname}
+              type={obj.type} date={obj.date} id={obj.id} obj={obj}
+              selectEvent={selectEvent} openCloseEditData={openCloseEditData}
+              openCloseDeleteData={openCloseDeleteData}/>
+            ))}
+          </Route>
+
+        </Switch>
+
+      </div>
+    </Router>
   )
 }

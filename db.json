@@ -2,7 +2,7 @@
   "events": [
     {
       "id": 1,
-      "name": "Transportation/Trucking/Railroad ron",
+      "name": "Transportation/Trucking/Railroad",
       "location": "03936 Kuhlman Field",
       "hostname": "Joseph Reichel",
       "type": "private",

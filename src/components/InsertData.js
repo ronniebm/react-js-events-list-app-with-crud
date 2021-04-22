@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import '../styles/InsertData.css'
 
 export const InsertData = ({openCloseInsertData, handleChange, postRequest}) => {
@@ -11,8 +12,10 @@ export const InsertData = ({openCloseInsertData, handleChange, postRequest}) => 
         <div><input onChange={handleChange} className="fields__all fields__hostname" type="text" name="hostname" placeholder="Hostname" /></div>
         <div><input onChange={handleChange} className="fields__all fields__field" type="text" name="type" placeholder="Event type" /></div>
         <div><input onChange={handleChange} className="fields__all fields__field" type="text" name="date" placeholder="date" /></div>
-        <button className="fields__buttons" onClick={()=>openCloseInsertData()}>Cancel</button>
-        <button className="fields__buttons" onClick={()=>postRequest()}>Save</button>
+        <Link to="/">
+          <button className="fields__buttons" onClick={()=>openCloseInsertData()}>Cancel</button>
+          <button className="fields__buttons" onClick={()=>postRequest()}>Save</button>
+        </Link>
       </div>
     </div>
   )
