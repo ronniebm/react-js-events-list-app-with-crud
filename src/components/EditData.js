@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import '../styles/EditData.css'
 
-export const EditData = ({handleChange, putRequest, eventSelected, setEventSelected, selectEvent, data}) => {
+export const EditData = ({handleChange, putRequest, eventSelected}) => {
   
   const [editMenu, setEditMenu] = useState(false);
 

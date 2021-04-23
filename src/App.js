@@ -20,7 +20,6 @@ const baseUrl = `http://localhost:3001/events/`;
 export const App = () => {
 
   const [data, setData] = useState([]);
-  const [insertMenu, setInsertMenu] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     id: '',
     name: '',
@@ -48,7 +47,6 @@ export const App = () => {
     await axios.post(baseUrl, eventSelected)
     .then(response => {
       setData(data.concat(response.data))
-      openCloseInsertData()
     })
   }
 
@@ -76,10 +74,6 @@ export const App = () => {
     })
   };
 
-  const openCloseInsertData = () => {
-    setInsertMenu(!insertMenu);
-  };
-
   const selectEvent = (theEvent, mode) => {
     setEventSelected(theEvent);
   };
@@ -88,6 +82,7 @@ export const App = () => {
     getRequest();
   },[]);
 
+
   return (
     <Router>
       <div className="app">
@@ -95,7 +90,6 @@ export const App = () => {
 
           <Route path="/new">
             <InsertData
-                openCloseInsertData={openCloseInsertData}
                 handleChange={handleChange}
                 postRequest={postRequest}
             />
@@ -104,12 +98,9 @@ export const App = () => {
 
           <Route path="/edit/:eventId">
             <EditData
-                // openCloseEditData={openCloseEditData}
                 handleChange={handleChange}
                 putRequest={putRequest}
                 eventSelected={eventSelected}
-                setEventSelected={setEventSelected}
-                data={data} 
             />
           </Route>
 
@@ -123,7 +114,7 @@ export const App = () => {
   
   
           <Route exact ={true} path="/">
-            <EventToolBar openCloseInsertData={openCloseInsertData} />
+            <EventToolBar />
 
             {data.map(obj => (
             <Card 

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import '../styles/Card.css'
 
-export const Card = ({id, name, location, hostname, type, date, obj, selectEvent, openCloseEditData, openCloseDeleteData}) => {
+export const Card = ({id, name, location, hostname, type, date, obj, selectEvent }) => {
   return (
     <div className="card">
         <div className="card__header">
