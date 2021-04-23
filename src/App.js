@@ -19,6 +19,7 @@ const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
 export const App = () => {
 
   const [data, setData] = useState([]);
+  const [inputTextSearch, setInputTextSearch] = useState('');
   const [eventSelected, setEventSelected] = useState({
     id: '',
     name: '',
@@ -35,7 +36,7 @@ export const App = () => {
 
   // GET request.
   const getRequest = async () => {
-    await axios.get(baseUrl)
+    await axios.get(`${baseUrl}?q=${inputTextSearch}`)
     .then(response =>{
       setData(response.data);
     })
@@ -113,7 +114,11 @@ export const App = () => {
   
   
           <Route exact ={true} path="/">
-            <EventToolBar />
+            <EventToolBar 
+              inputTextSearch={inputTextSearch}
+              setInputTextSearch={setInputTextSearch}
+              getRequest={getRequest}
+            />
 
             {data.map(obj => (
             <Card 
