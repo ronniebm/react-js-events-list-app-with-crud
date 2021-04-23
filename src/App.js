@@ -13,16 +13,14 @@ import axios from 'axios';
 import './styles/App.css';
 
 
-const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-// const baseUrl = `http://localhost:3001/events/`;
+// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+const baseUrl = `http://localhost:3001/events/`;
 
 
 export const App = () => {
 
   const [data, setData] = useState([]);
   const [insertMenu, setInsertMenu] = useState(false);
-  const [editMenu, setEditMenu] = useState(false);
-  const [deleteMenu, setDeleteMenu] = useState(false);
   const [eventSelected, setEventSelected] = useState({
     id: '',
     name: '',
@@ -66,7 +64,6 @@ export const App = () => {
         return obj;
       })
       setData(newData);
-      openCloseEditData();
       //set state apagar spinner
     })
   }
@@ -76,63 +73,38 @@ export const App = () => {
     await axios.delete(baseUrl + eventSelected.id)
     .then(response => {
       setData(data.filter(obj => obj.id !== eventSelected.id))
-      openCloseDeleteData()
     })
-  }
+  };
 
   const openCloseInsertData = () => {
     setInsertMenu(!insertMenu);
-  }
-
-  const openCloseEditData = () => {
-    setEditMenu(!editMenu);
-  }
-
-  const openCloseDeleteData = () => {
-    setDeleteMenu(!deleteMenu);
-  }
+  };
 
   const selectEvent = (theEvent, mode) => {
     setEventSelected(theEvent);
-    (mode === 'edit') ? openCloseEditData() : openCloseDeleteData();
   };
 
   useEffect( () => {
     getRequest();
-  },[])
+  },[]);
 
   return (
     <Router>
-
       <div className="app">
-
-        {
-          insertMenu ? <InsertData
-                          openCloseInsertData={openCloseInsertData}
-                          handleChange={handleChange}
-                          postRequest={postRequest}
-                      /> : null
-        }
-
-        {
-          deleteMenu ? <DeleteData
-                        openCloseDeleteData={openCloseDeleteData}
-                        deleteRequest={deleteRequest}
-                        eventSelected={eventSelected}
-                    /> : null
-        }
-
-        
-
         <Switch>
 
-          <Route path="/create">
-            ...
+          <Route path="/new">
+            <InsertData
+                openCloseInsertData={openCloseInsertData}
+                handleChange={handleChange}
+                postRequest={postRequest}
+            />
           </Route>
+
 
           <Route path="/edit/:eventId">
             <EditData
-                openCloseEditData={openCloseEditData}
+                // openCloseEditData={openCloseEditData}
                 handleChange={handleChange}
                 putRequest={putRequest}
                 eventSelected={eventSelected}
@@ -141,25 +113,29 @@ export const App = () => {
             />
           </Route>
 
+
           <Route path="/delete">
-            ...
+            <DeleteData
+                deleteRequest={deleteRequest}
+                eventSelected={eventSelected}
+              />
           </Route>
-
+  
+  
           <Route exact ={true} path="/">
-
             <EventToolBar openCloseInsertData={openCloseInsertData} />
+
             {data.map(obj => (
             <Card 
               key={obj.id}
               name={obj.name} location={obj.location} hostname={obj.hostname}
               type={obj.type} date={obj.date} id={obj.id} obj={obj}
-              selectEvent={selectEvent} openCloseEditData={openCloseEditData}
-              openCloseDeleteData={openCloseDeleteData}/>
+              selectEvent={selectEvent}
+              />
             ))}
           </Route>
 
         </Switch>
-
       </div>
     </Router>
   )
