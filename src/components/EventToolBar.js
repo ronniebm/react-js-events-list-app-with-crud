@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { MyPaginator } from './MyPaginator';
 import '../styles/EventToolBar.css';
 
 
-export const EventToolBar = ({inputTextSearch, setInputTextSearch, getRequest}) => {
+export const EventToolBar = ({inputTextSearch, setInputTextSearch, getRequest, eventsPage, setEventsPage}) => {
 
   let typingTimer;                //timer identifier
   let doneTypingTime = 500;  //time in ms, 2 seconds.
@@ -48,6 +49,11 @@ export const EventToolBar = ({inputTextSearch, setInputTextSearch, getRequest}) 
               placeholder="Search an event"/>
           </form>
         </div>
+        <MyPaginator
+          eventsPage={eventsPage}
+          setEventsPage={setEventsPage}
+          getRequest={getRequest}
+        />
       </div>
     </div>
   )

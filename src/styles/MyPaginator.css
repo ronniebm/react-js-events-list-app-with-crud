@@ -1,0 +1,38 @@
+.my-paginator {
+  width: calc(100vw - 28px);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.my-paginator__page {
+  width: 75px;
+  margin-top: 3px;
+  margin-bottom: 0;
+  color: #4f6753;
+  font-size: 14px;
+}
+
+.my-paginator__buttons {
+  width: calc(100vw - 16px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-paginator__buttons__button {
+  margin-left: 15px;
+  width: 60px;
+  height: 25px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 0px 3px green;
+  background-color: #a8d1a8;
+  color: #176723;
+  font-weight: 500;
+}
+
+.my-paginator__buttons__button:hover {
+  background-color: green;
+  color: white;
+}

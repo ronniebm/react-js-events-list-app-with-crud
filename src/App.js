@@ -13,12 +13,13 @@ import axios from 'axios';
 import './styles/App.css';
 
 
-const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-// const baseUrl = `http://localhost:3001/events/`;
+// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+const baseUrl = `http://localhost:3001/events/`;
 
 export const App = () => {
 
   const [data, setData] = useState([]);
+  const [eventsPage, setEventsPage] = useState(1);
   const [inputTextSearch, setInputTextSearch] = useState('');
   const [eventSelected, setEventSelected] = useState({
     id: '',
@@ -36,8 +37,8 @@ export const App = () => {
 
   // GET request.
   const getRequest = async () => {
-    await axios.get(`${baseUrl}?q=${inputTextSearch}`)
-    .then(response =>{
+    await axios.get(`${baseUrl}?q=${inputTextSearch}&_page=${eventsPage}&_limit=10`)
+    .then(response => {
       setData(response.data);
     })
   }
@@ -46,7 +47,7 @@ export const App = () => {
   const postRequest = async () => {
     await axios.post(baseUrl, eventSelected)
     .then(response => {
-      setData(data.concat(response.data))
+      setData(data.concat(response.data));
     })
   }
 
@@ -81,7 +82,6 @@ export const App = () => {
   useEffect( () => {
     getRequest();
   },[]);
-
 
   return (
     <Router>
@@ -118,6 +118,8 @@ export const App = () => {
               inputTextSearch={inputTextSearch}
               setInputTextSearch={setInputTextSearch}
               getRequest={getRequest}
+              eventsPage={eventsPage}
+              setEventsPage={setEventsPage}
             />
 
             {data.map(obj => (

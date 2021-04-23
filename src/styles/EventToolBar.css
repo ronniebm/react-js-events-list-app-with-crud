@@ -1,7 +1,7 @@
 .toolbar {
   margin-top: -10px;
   margin-bottom: 25px;
-  height: 115px;
+  height: 135px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
 .toolbar__wrapper {
   position: fixed;
   width: 100%;
-  height: 115px;
+  height: 135px;
   padding: 10px 20px 0px 40px;
   background-color: #d8e7e2;
   z-index: 100;
