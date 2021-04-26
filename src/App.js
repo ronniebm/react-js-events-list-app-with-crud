@@ -11,10 +11,11 @@ import { Card } from './components/Card';
 import { EventToolBar } from './components/EventToolBar';
 import axios from 'axios';
 import './styles/App.css';
+import { InsertDataFormik } from './components/InsertDataFormik';
 
 
-const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-// const baseUrl = `http://localhost:3001/events/`;
+// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+const baseUrl = `http://localhost:3001/events/`;
 
 export const App = () => {
 
@@ -119,6 +120,8 @@ export const App = () => {
               eventsPage={eventsPage}
               setEventsPage={setEventsPage}
             />
+
+            <InsertDataFormik />
 
             {data.map(obj => (
             <Card 
