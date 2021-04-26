@@ -5,14 +5,10 @@ export const MyPaginator = ({ eventsPage, setEventsPage, getRequest }) => {
 
   const nextPage = () => {
     setEventsPage( currentPage => (currentPage + 1));
-    getRequest();
-    console.log('next page was pressed !');
   }
 
   const prevPage = () => {
     setEventsPage( actualPage => (actualPage - 1));
-    console.log('prev page was pressed !');
-    getRequest();
   }
 
   return (
@@ -21,11 +17,11 @@ export const MyPaginator = ({ eventsPage, setEventsPage, getRequest }) => {
       <p className="my-paginator__page">Page: {eventsPage}</p>
         <button 
           className="my-paginator__buttons__button"
-          onClick={ prevPage }
+          onClick={ ()=>prevPage() }
         >Prev</button>
         <button 
           className="my-paginator__buttons__button"
-          onClick={ nextPage }
+          onClick={ ()=>nextPage() }
         >Next</button>
       </div>
     </div>

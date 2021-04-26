@@ -79,9 +79,7 @@ export const App = () => {
     setEventSelected(theEvent);
   };
 
-  useEffect( () => {
-    getRequest();
-  },[]);
+  useEffect( () => getRequest(), [eventsPage] );
 
   return (
     <Router>
