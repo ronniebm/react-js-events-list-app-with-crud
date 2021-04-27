@@ -1,9 +1,46 @@
 .insert-data-formik {
-  background-color: yellow;
+  background-color: #d4f3de;
+  padding: 20px;
+}
+
+.insert-data-formik__title {
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #254c25;
+}
+
+.insert-data-formik__field-div {
+  width: 90%;
+  height: 65px;
+}
+
+.insert-data-formik__field {
+  height: 30px;
+  width: calc(100vw - 77px);
+  font-size: 18px;
+}
+
+.insert-data-formik__select {
+  height: 35px;
+  width: calc(100vw - 57px);
+  font-size: 18px;
 }
 
 .insert-data-formik__error {
-  background-color: tomato;
   position: relative;
-  top: -50px;
+  width: 250px;
+  top: -65px;
+  font-size: 10.3px;
+  color: red;
+}
+
+.insert-data-formik__button {
+  background-color: green;
+  width: 120px;
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-right: 20px;
 }
