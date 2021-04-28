@@ -1,10 +1,17 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
+import moment from 'moment';
+import TimePicker from 'rc-time-picker';
 import "react-datepicker/dist/react-datepicker.css";
+import 'rc-time-picker/assets/index.css';
 import '../styles/InsertDataFormik.css';
 
+
 const ErrorDiv = ({error}) => <p className="insert-data-formik__error">{error}</p>
+const now = moment().hour(0).minute(0);
+const format = 'h:mm a';
+let myDate = null;
 
 const dropDownOptions = [
   { key: 'Select an option', value: ''},
@@ -12,10 +19,17 @@ const dropDownOptions = [
   { key: 'Option 2', value: 'private'}
 ]
 
-export const InsertDataFormik = () => {
+const formatDate = (date, time) => {
+  let newDate = '';
+  newDate += date.getMonth() < 10 ? `0${date.getMonth() + 1}/` : `${date.getMonth()}/`;
+  newDate += date.getDate() < 10 ? `0${date.getDate()}/` : `${date.getDate()}/`;
+  newDate += `${date.getFullYear()} `;
+  newDate += time.hour() < 10 ? `0${time.hour()}:` : `${time.hour()}:`;
+  newDate += time.minute() < 10 ? `0${time.minute()}:00` : `${time.minute()}:00`;
+  return newDate;
+}
 
-  // const { setFieldValue } = useFormikContext();
-  // const [field] = useField(props);
+export const InsertDataFormik = () => {
 
   return (
     <div className="insert-data-formik">
@@ -28,6 +42,7 @@ export const InsertDataFormik = () => {
           hostName: '',
           eventType: '',
           date: '',
+          time: ''
         }}
   
         validate={values => {
@@ -44,9 +59,11 @@ export const InsertDataFormik = () => {
           if (!values.eventType || values.eventType === 'Select event type') {
             errors.eventType = 'Please choose an option';
           }
-          console.log(values.eventType);
           if (!values.date) {
             errors.date = 'A date is required';
+          }
+          if (!values.time) {
+            errors.time = 'Time is required';
           }
           return errors;
         }}
@@ -94,7 +111,6 @@ export const InsertDataFormik = () => {
                 options={dropDownOptions}
                 placeholder="Please select an option"
               >
-                {/* <option value=""></option> */}
                 <option defaultValue>Select event type</option>
                 <option value="public">public</option>
                 <option value="private">private</option>
@@ -103,25 +119,39 @@ export const InsertDataFormik = () => {
             </div>
   
             <div className="insert-data-formik__field-div">
-              {/* <Field type="text" name="date" placeholder="Event's date" className="insert-data-formik__field"/> */}
-              <DatePicker 
+              <DatePicker
                 selected={values.date}
                 dateFormat="MMMM d, yyyy"
-                className="form-control"
                 name="date"
-                onChange={date => setFieldValue('date', date)}
+                onChange={date => {setFieldValue('date', date)}}
                 placeholderText="Please select a date"
               />
               {(errors.date && touched.date && errors.date) ? <ErrorDiv error={errors.date}/>: null}
 
-
+              <TimePicker
+                placeholder="Please set a time"
+                selected={values.time}
+                showSecond={false}
+                className="xxx"
+                name="time"
+                onChange={ time => time ? setFieldValue('time', formatDate(values.date, time)) : setFieldValue('time', '')
+                }
+                format={format}
+                use12Hours
+                inputReadOnly
+              />
+              {(errors.time && touched.time && errors.time) ? <ErrorDiv error={errors.time}/>: null}
             </div>
   
             <div className="insert-data-formik__field-div">
               <button type="submit" disabled={isSubmitting} className="insert-data-formik__button">
                 Cancel
               </button>
-              <button type="cancel" disabled={isSubmitting} className="insert-data-formik__button">
+              <button
+                type="cancel"
+                disabled={isSubmitting}
+                className="insert-data-formik__button"
+              >
                 Save
               </button>
             </div>
