@@ -14,8 +14,8 @@ import './styles/App.css';
 import { InsertDataFormik } from './components/InsertDataFormik';
 
 
-// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-const baseUrl = `http://localhost:3001/events/`;
+const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+// const baseUrl = `http://localhost:3001/events/`;
 
 export const App = () => {
 
