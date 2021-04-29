@@ -1,7 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
-import moment from 'moment';
 import TimePicker from 'rc-time-picker';
 import "react-datepicker/dist/react-datepicker.css";
 import 'rc-time-picker/assets/index.css';
@@ -9,10 +8,8 @@ import '../styles/InsertDataFormik.css';
 
 
 const ErrorDiv = ({error}) => <p className="insert-data-formik__error">{error}</p>
-const now = moment().hour(0).minute(0);
 const format = 'h:mm a';
 let myDate = null;
-
 const dropDownOptions = [
   { key: 'Select an option', value: ''},
   { key: 'Option 1', value: 'public'},
@@ -35,41 +32,41 @@ export const InsertDataFormik = () => {
     <div className="insert-data-formik">
       <h4 className="insert-data-formik__title">Create a new Event</h4>
       <Formik
-  
         initialValues={{
-          event: '',
+          name: '',
           location: '',
-          hostName: '',
-          eventType: '',
-          date: '',
-          time: ''
+          hostname: '',
+          type: '',
+          datepicker: '',
+          date: ''
         }}
   
         validate={values => {
           const errors = {};
-          if (!values.event) {
-            errors.event = 'Event name is required';
+          if (!values.name) {
+            errors.name = 'Event name is required';
           }
           if (!values.location) {
             errors.location = 'A location is required';
           }
-          if (!values.hostName) {
-            errors.hostName = 'A host name is required';
+          if (!values.hostname) {
+            errors.hostname = 'A host name is required';
           }
-          if (!values.eventType || values.eventType === 'Select event type') {
-            errors.eventType = 'Please choose an option';
+          if (!values.type || values.type === 'Select event type') {
+            errors.type = 'Please choose an option';
+          }
+          if (!values.datepicker) {
+            errors.datepicker = 'A date is required';
           }
           if (!values.date) {
-            errors.date = 'A date is required';
-          }
-          if (!values.time) {
-            errors.time = 'Time is required';
+            errors.date = 'Time is required';
           }
           return errors;
         }}
   
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            delete values.datepicker;
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
@@ -89,8 +86,8 @@ export const InsertDataFormik = () => {
   
           <Form>
             <div className="insert-data-formik__field-div">
-              <Field type="text" name="event" placeholder="Event name" className="insert-data-formik__field"/>
-              {(errors.event && touched.event && errors.event) ? <ErrorDiv error={errors.event}/>: null}
+              <Field type="text" name="name" placeholder="Event name" className="insert-data-formik__field"/>
+              {(errors.name && touched.name && errors.name) ? <ErrorDiv error={errors.name}/>: null}
             </div>
   
             <div className="insert-data-formik__field-div">
@@ -99,14 +96,14 @@ export const InsertDataFormik = () => {
             </div>
   
             <div className="insert-data-formik__field-div">
-              <Field type="text" name="hostName" placeholder="Event host name" className="insert-data-formik__field"/>
-              {(errors.hostName && touched.hostName && errors.hostName) ? <ErrorDiv error={errors.hostName}/>: null}
+              <Field type="text" name="hostname" placeholder="Event host name" className="insert-data-formik__field"/>
+              {(errors.hostname && touched.hostname && errors.hostname) ? <ErrorDiv error={errors.hostname}/>: null}
             </div>
   
             <div className="insert-data-formik__field-div">
               <Field 
                 as="select"
-                name="eventType"
+                name="type"
                 className="insert-data-formik__select"
                 options={dropDownOptions}
                 placeholder="Please select an option"
@@ -115,32 +112,43 @@ export const InsertDataFormik = () => {
                 <option value="public">public</option>
                 <option value="private">private</option>
               </Field>
-              {(errors.eventType && touched.eventType && errors.eventType) ? <ErrorDiv error={errors.eventType}/>: null}
+              {(errors.type && touched.type && errors.type) ? <ErrorDiv error={errors.type}/>: null}
             </div>
   
             <div className="insert-data-formik__field-div">
               <DatePicker
-                selected={values.date}
+                selected={values.datepicker}
                 dateFormat="MMMM d, yyyy"
-                name="date"
-                onChange={date => {setFieldValue('date', date)}}
+                name="datepicker"
+                onChange={datepicker => {
+                  setFieldValue('datepicker', datepicker);
+                  if(myDate) {setFieldValue('date', formatDate(datepicker, myDate))};
+                  }
+                }
                 placeholderText="Please select a date"
               />
-              {(errors.date && touched.date && errors.date) ? <ErrorDiv error={errors.date}/>: null}
+              {(errors.datepicker && touched.datepicker && errors.datepicker) ? <ErrorDiv error={errors.datepicker}/>: null}
 
               <TimePicker
                 placeholder="Please set a time"
-                selected={values.time}
+                selected={values.date}
                 showSecond={false}
                 className="xxx"
-                name="time"
-                onChange={ time => time ? setFieldValue('time', formatDate(values.date, time)) : setFieldValue('time', '')
+                name="date"
+                onChange={ date => {
+                  if(date) {
+                    setFieldValue('date', formatDate(values.datepicker, date));
+                    myDate = date;
+                  } else {
+                    setFieldValue('date', '');
+                  };
+                }
                 }
                 format={format}
                 use12Hours
                 inputReadOnly
               />
-              {(errors.time && touched.time && errors.time) ? <ErrorDiv error={errors.time}/>: null}
+              {(errors.date && touched.date && errors.date) ? <ErrorDiv error={errors.date}/>: null}
             </div>
   
             <div className="insert-data-formik__field-div">
