@@ -4,7 +4,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { InsertData } from './components/InsertData';
+// import { InsertData } from './components/InsertData';
 import { EditData } from './components/EditData';
 import { DeleteData } from './components/DeleteData';
 import { Card } from './components/Card';
@@ -46,10 +46,12 @@ export const App = () => {
 
   // POST request.
   const postRequest = async () => {
-    await axios.post(baseUrl, eventSelected)
-    .then(response => {
-      setData(data.concat(response.data));
-    })
+    if (eventSelected.name !== '') {
+      await axios.post(baseUrl, eventSelected)
+      .then(response => {
+        setData(data.concat(response.data));
+      })
+    }
   }
 
   // PUT request.
@@ -81,6 +83,7 @@ export const App = () => {
   };
 
   useEffect( () => getRequest(), [eventsPage] );
+  useEffect( () => postRequest(), [eventSelected] );
 
   return (
     <Router>
@@ -88,9 +91,14 @@ export const App = () => {
         <Switch>
 
           <Route path="/new">
-            <InsertData
+            {/* <InsertData
                 handleChange={handleChange}
                 postRequest={postRequest}
+            /> */}
+
+            <InsertDataFormik
+              handleChange={handleChange}
+              setEventSelected={setEventSelected}
             />
           </Route>
 
@@ -120,8 +128,6 @@ export const App = () => {
               eventsPage={eventsPage}
               setEventsPage={setEventsPage}
             />
-
-            <InsertDataFormik />
 
             {data.map(obj => (
             <Card 

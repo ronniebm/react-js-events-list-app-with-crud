@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
 import TimePicker from 'rc-time-picker';
@@ -26,7 +27,7 @@ const formatDate = (date, time) => {
   return newDate;
 }
 
-export const InsertDataFormik = () => {
+export const InsertDataFormik = ({setEventSelected}) => {
 
   return (
     <div className="insert-data-formik">
@@ -40,7 +41,7 @@ export const InsertDataFormik = () => {
           datepicker: '',
           date: ''
         }}
-  
+
         validate={values => {
           const errors = {};
           if (!values.name) {
@@ -63,12 +64,13 @@ export const InsertDataFormik = () => {
           }
           return errors;
         }}
-  
+
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             delete values.datepicker;
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
+            setEventSelected(values);
           }, 400);
         }}
       >
@@ -152,16 +154,21 @@ export const InsertDataFormik = () => {
             </div>
   
             <div className="insert-data-formik__field-div">
-              <button type="submit" disabled={isSubmitting} className="insert-data-formik__button">
+              <Link to="/">
+              <button type="cancel" disabled={isSubmitting} className="insert-data-formik__button">
                 Cancel
               </button>
+              </Link>
+
               <button
-                type="cancel"
+                type="submit"
                 disabled={isSubmitting}
                 className="insert-data-formik__button"
               >
                 Save
               </button>
+              
+
             </div>
   
           </Form>

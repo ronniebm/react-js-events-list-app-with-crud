@@ -794,19 +794,11 @@
     },
     {
       "id": 100,
-      "name": "The big Event !!!",
+      "name": "The JAVASCRIPT event !!!",
       "location": "Barranquilla",
       "hostname": "Ronnie B.",
       "type": "public",
       "date": "05/24/2021 15:05:38"
-    },
-    {
-      "id": 101,
-      "name": "Conferencia React Js",
-      "location": "Barranquilla",
-      "hostname": "Joseph Reichel",
-      "type": "public",
-      "date": "08/23/2021 12:08:23"
     }
   ]
 }
