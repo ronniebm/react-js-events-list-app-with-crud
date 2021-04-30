@@ -4,14 +4,15 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { InsertData } from './components/InsertData';
+// import { InsertData } from './components/InsertData';
 import { EditData } from './components/EditData';
 import { DeleteData } from './components/DeleteData';
 import { Card } from './components/Card';
 import { EventToolBar } from './components/EventToolBar';
 import axios from 'axios';
-import './styles/App.css';
 import { InsertDataFormik } from './components/InsertDataFormik';
+import { EditDataFormik } from './components/EditDataFormik';
+import './styles/App.css';
 
 
 const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
@@ -19,6 +20,8 @@ const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
 
 export const App = () => {
 
+  const [postStatus, setPostStatus] = useState('');
+  const [putStatus, setPutStatus] = useState('');
   const [data, setData] = useState([]);
   const [eventsPage, setEventsPage] = useState(1);
   const [inputTextSearch, setInputTextSearch] = useState('');
@@ -46,26 +49,32 @@ export const App = () => {
 
   // POST request.
   const postRequest = async () => {
-    await axios.post(baseUrl, eventSelected)
-    .then(response => {
-      setData(data.concat(response.data));
-    })
+    if (eventSelected.name !== '') {
+      await axios.post(baseUrl, eventSelected)
+      .then(response => {
+        setData(data.concat(response.data));
+      })
+      setPostStatus('');
+    }
   }
 
   // PUT request.
   const putRequest = async () => {
     //setstate para activar spinner
-    await axios.put(baseUrl + eventSelected.id, eventSelected)
-    .then(response => {
-      var newData = data.map(obj => {
-        if(eventSelected.id === obj.id) {
-          obj = {...response.data};
-        }
-        return obj;
-      })
-      setData(newData);
-      //set state apagar spinner
-    })
+    if (eventSelected.name !== '') {
+      await axios.put(baseUrl + eventSelected.id, eventSelected)
+      .then(response => {
+        var newData = data.map(obj => {
+          if(eventSelected.id === obj.id) {
+            obj = {...response.data};
+          }
+          return obj;
+        })
+        setPutStatus('');
+        setData(newData);
+        //set state apagar spinner
+    }
+    )}
   }
 
   // DELETE request.
@@ -81,6 +90,8 @@ export const App = () => {
   };
 
   useEffect( () => getRequest(), [eventsPage] );
+  useEffect( () => postRequest(), [postStatus] );
+  useEffect( () => putRequest(), [putStatus] );
 
   return (
     <Router>
@@ -88,18 +99,18 @@ export const App = () => {
         <Switch>
 
           <Route path="/new">
-            <InsertData
-                handleChange={handleChange}
-                postRequest={postRequest}
+            <InsertDataFormik
+              setEventSelected={setEventSelected}
+              setPostStatus={setPostStatus}
             />
           </Route>
 
 
           <Route path="/edit/:eventId">
-            <EditData
-                handleChange={handleChange}
-                putRequest={putRequest}
-                eventSelected={eventSelected}
+            <EditDataFormik 
+              eventSelected={eventSelected}
+              setEventSelected={setEventSelected}
+              setPutStatus={setPutStatus}
             />
           </Route>
 
@@ -120,8 +131,6 @@ export const App = () => {
               eventsPage={eventsPage}
               setEventsPage={setEventsPage}
             />
-
-            <InsertDataFormik />
 
             {data.map(obj => (
             <Card 

@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import '../styles/InsertData.css'
 
 export const InsertData = ({handleChange, postRequest}) => {
-
-  const [insertMenu, setInsertMenu] = useState(false);
-
-  const openCloseInsertData = () => {
-    setInsertMenu(!insertMenu);
-  };
 
   return (
     <div className="fields">
@@ -20,7 +14,7 @@ export const InsertData = ({handleChange, postRequest}) => {
         <div><input onChange={handleChange} className="fields__all fields__field" type="text" name="type" placeholder="Event type" /></div>
         <div><input onChange={handleChange} className="fields__all fields__field" type="text" name="date" placeholder="date" /></div>
         <Link to="/">
-          <button className="fields__buttons" onClick={()=>openCloseInsertData()}>Cancel</button>
+          <button className="fields__buttons">Cancel</button>
         </Link>
         <Link to="/">
           <button className="fields__buttons" onClick={()=>postRequest()}>Save</button>
