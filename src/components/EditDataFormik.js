@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
 import TimePicker from 'rc-time-picker';
+import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import 'rc-time-picker/assets/index.css';
 import '../styles/InsertDataFormik.css';
@@ -27,20 +28,21 @@ const formatDate = (date, time) => {
   return newDate;
 }
 
-export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
+export const EditDataFormik = ({eventSelected, setEventSelected, setPutStatus}) => {
+
+  const datePicker = new Date(eventSelected.date);
+  const date = moment(datePicker);
 
   return (
     <div className="insert-data-formik">
-      <h4 className="insert-data-formik__title">Create a new Event</h4>
+      <h4 className="insert-data-formik__title">Edit this Event</h4>
       <Formik
-        initialValues={{
-          name: '',
-          location: '',
-          hostname: '',
-          type: '',
-          datepicker: '',
-          date: ''
-        }}
+        initialValues={
+          {...eventSelected,
+          datepicker: datePicker,
+          date: date
+        } 
+        }
 
         validate={values => {
           const errors = {};
@@ -71,7 +73,7 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
             setEventSelected(values);
-            setPostStatus('post');
+            setPutStatus('put');
           }, 400);
         }}
       >
@@ -86,7 +88,7 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
           setFieldValue
           /* and other goodies */
         }) => (
-  
+
           <Form>
             <div className="insert-data-formik__field-div">
               <Field type="text" name="name" placeholder="Event name" className="insert-data-formik__field"/>
@@ -133,6 +135,7 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
               {(errors.datepicker && touched.datepicker && errors.datepicker) ? <ErrorDiv error={errors.datepicker}/>: null}
 
               <TimePicker
+                defaultValue={date}
                 placeholder="Please set a time"
                 selected={values.date}
                 showSecond={false}
