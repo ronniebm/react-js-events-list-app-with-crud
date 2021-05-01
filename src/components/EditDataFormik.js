@@ -40,7 +40,7 @@ export const EditDataFormik = ({eventSelected, setEventSelected, setPutStatus}) 
         initialValues={
           {...eventSelected,
           datepicker: datePicker,
-          date: date
+          date: formatDate(datePicker, date)
         } 
         }
 

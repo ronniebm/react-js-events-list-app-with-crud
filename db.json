@@ -2,11 +2,11 @@
   "events": [
     {
       "id": 1,
-      "name": "Transportation/Trucking/Railroad s",
+      "name": "Transportation/Trucking/Railroad",
       "location": "03936 Kuhlman Field",
-      "hostname": "Joseph Reichel Jr",
+      "hostname": "Joseph Reichel",
       "type": "private",
-      "date": "2022-01-20T13:01:29.000Z"
+      "date": "01/20/2022 20:00:00"
     },
     {
       "id": 2,
@@ -809,19 +809,19 @@
       "id": 101
     },
     {
-      "name": "Conferencia Porthos",
+      "name": "Torneo Playstation",
       "location": "Barranquilla",
-      "hostname": "Julieth Arias",
-      "type": "public",
-      "date": "05/01/2021 14:55:00",
+      "hostname": "Ronnie B.",
+      "type": "private",
+      "date": "04/30/2021 19:29:00",
       "id": 102
     },
     {
-      "name": "Conferencia Porthos",
+      "name": "Torneo Playstation",
       "location": "Barranquilla",
-      "hostname": "Julieth Arias",
-      "type": "public",
-      "date": "05/01/2021 14:55:00",
+      "hostname": "Ronnie B.",
+      "type": "private",
+      "date": "04/30/2021 19:29:00",
       "id": 103
     }
   ]

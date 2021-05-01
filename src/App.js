@@ -5,7 +5,6 @@ import {
   Route
 } from 'react-router-dom';
 // import { InsertData } from './components/InsertData';
-import { EditData } from './components/EditData';
 import { DeleteData } from './components/DeleteData';
 import { Card } from './components/Card';
 import { EventToolBar } from './components/EventToolBar';
@@ -15,8 +14,8 @@ import { EditDataFormik } from './components/EditDataFormik';
 import './styles/App.css';
 
 
-const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-// const baseUrl = `http://localhost:3001/events/`;
+// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
+const baseUrl = `http://localhost:3001/events/`;
 
 export const App = () => {
 
@@ -34,10 +33,10 @@ export const App = () => {
     date: ''
   })
 
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setEventSelected( prevState => ({...prevState, [name]: value}) )
-  }
+  // const handleChange = e => {
+  //   const {name, value} = e.target;
+  //   setEventSelected( prevState => ({...prevState, [name]: value}) )
+  // }
 
   // GET request.
   const getRequest = async () => {
@@ -70,8 +69,8 @@ export const App = () => {
           }
           return obj;
         })
-        setPutStatus('');
         setData(newData);
+        setPutStatus('');
         //set state apagar spinner
     }
     )}
@@ -91,7 +90,7 @@ export const App = () => {
 
   useEffect( () => getRequest(), [eventsPage] );
   useEffect( () => postRequest(), [postStatus] );
-  useEffect( () => putRequest(), [putStatus] );
+  useEffect( () => putRequest(), [putStatus]);
 
   return (
     <Router>
