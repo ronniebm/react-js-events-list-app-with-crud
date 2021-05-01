@@ -6,7 +6,7 @@
       "location": "03936 Kuhlman Field",
       "hostname": "Joseph Reichel",
       "type": "private",
-      "date": "01/20/2022 20:00:00"
+      "date": "01/20/2022 21:45:00"
     },
     {
       "id": 2,
@@ -804,25 +804,49 @@
       "name": "Conferencia Bootstrap",
       "location": "Barranquilla",
       "hostname": "Ronnie B.",
-      "type": "private",
-      "date": "04/30/2021 09:02:00",
+      "type": "public",
+      "date": "04/30/2021 09:00:00",
       "id": 101
     },
     {
-      "name": "Torneo Playstation",
+      "name": "Torneo Futbol",
       "location": "Barranquilla",
       "hostname": "Ronnie B.",
-      "type": "private",
-      "date": "04/30/2021 19:29:00",
-      "id": 102
+      "type": "public",
+      "date": "05/01/2021 19:55:00",
+      "id": 103
     },
     {
-      "name": "Torneo Playstation",
+      "name": "Conferencia React Js",
+      "location": "03936 Kuhlman Field",
+      "hostname": "Dr. Joshua Rolfson",
+      "type": "public",
+      "date": "04/06/2021 20:05:00",
+      "id": 104
+    },
+    {
+      "name": "Competencia de Salsa",
       "location": "Barranquilla",
       "hostname": "Ronnie B.",
+      "type": "public",
+      "date": "05/10/2021 15:00:00",
+      "id": 105
+    },
+    {
+      "name": "Campeonato Ajedrez",
+      "location": "Barranquilla",
+      "hostname": "Teatro Amira",
       "type": "private",
-      "date": "04/30/2021 19:29:00",
-      "id": 103
+      "date": "05/01/2021 20:05:00",
+      "id": 106
+    },
+    {
+      "name": "Billar en Barranquilla",
+      "location": "Barranquilla",
+      "hostname": "Joseph Reichel",
+      "type": "public",
+      "date": "06/10/2021 09:00:00",
+      "id": 107
     }
   ]
 }

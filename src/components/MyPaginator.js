@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/MyPaginator.css';
 
-export const MyPaginator = ({ eventsPage, setEventsPage, getRequest }) => {
+export const MyPaginator = ({ eventsPage, setEventsPage }) => {
 
   const nextPage = () => {
     setEventsPage( currentPage => (currentPage + 1));
   }
 
   const prevPage = () => {
-    setEventsPage( actualPage => (actualPage - 1));
+    (eventsPage > 1) ? setEventsPage( currentPage => (currentPage - 1)) : setEventsPage(1);
   }
 
   return (

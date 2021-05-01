@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
 import TimePicker from 'rc-time-picker';
@@ -28,6 +28,8 @@ const formatDate = (date, time) => {
 }
 
 export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
+
+  const history = useHistory()
 
   return (
     <div className="insert-data-formik">
@@ -66,13 +68,11 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
         }}
 
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            delete values.datepicker;
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-            setEventSelected(values);
-            setPostStatus('post');
-          }, 400);
+          delete values.datepicker;
+          setEventSelected(values);
+          setPostStatus('post');
+          setSubmitting(false);
+          history.push('/');
         }}
       >
         {({
@@ -120,6 +120,7 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
   
             <div className="insert-data-formik__field-div">
               <DatePicker
+                className="insert-data-formik__date-picker"
                 selected={values.datepicker}
                 dateFormat="MMMM d, yyyy"
                 name="datepicker"
@@ -131,12 +132,15 @@ export const InsertDataFormik = ({setEventSelected, setPostStatus}) => {
                 placeholderText="Please select a date"
               />
               {(errors.datepicker && touched.datepicker && errors.datepicker) ? <ErrorDiv error={errors.datepicker}/>: null}
+            </div>
 
+            <div className="insert-data-formik__field-div">
               <TimePicker
+                className="insert-data-formik__time-picker"
                 placeholder="Please set a time"
                 selected={values.date}
                 showSecond={false}
-                className="xxx"
+                minuteStep={15}
                 name="date"
                 onChange={ date => {
                   if(date) {

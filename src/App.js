@@ -14,29 +14,24 @@ import { EditDataFormik } from './components/EditDataFormik';
 import './styles/App.css';
 
 
-// const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
-const baseUrl = `http://localhost:3001/events/`;
+const baseUrl = `https://json-server-event-list-testing.herokuapp.com/events/`;
 
 export const App = () => {
 
-  const [postStatus, setPostStatus] = useState('');
-  const [putStatus, setPutStatus] = useState('');
-  const [data, setData] = useState([]);
-  const [eventsPage, setEventsPage] = useState(1);
-  const [inputTextSearch, setInputTextSearch] = useState('');
-  const [eventSelected, setEventSelected] = useState({
+  const initialState = {
     id: '',
     name: '',
     location: '',
     hostname: '',
     type: '',
     date: ''
-  })
-
-  // const handleChange = e => {
-  //   const {name, value} = e.target;
-  //   setEventSelected( prevState => ({...prevState, [name]: value}) )
-  // }
+  }
+  const [postStatus, setPostStatus] = useState('');
+  const [putStatus, setPutStatus] = useState('');
+  const [data, setData] = useState([]);
+  const [eventsPage, setEventsPage] = useState(1);
+  const [inputTextSearch, setInputTextSearch] = useState('');
+  const [eventSelected, setEventSelected] = useState(initialState)
 
   // GET request.
   const getRequest = async () => {
@@ -53,13 +48,13 @@ export const App = () => {
       .then(response => {
         setData(data.concat(response.data));
       })
+      setEventSelected(initialState   )
       setPostStatus('');
     }
   }
 
   // PUT request.
   const putRequest = async () => {
-    //setstate para activar spinner
     if (eventSelected.name !== '') {
       await axios.put(baseUrl + eventSelected.id, eventSelected)
       .then(response => {
@@ -71,9 +66,7 @@ export const App = () => {
         })
         setData(newData);
         setPutStatus('');
-        //set state apagar spinner
-    }
-    )}
+    })}
   }
 
   // DELETE request.
@@ -81,8 +74,7 @@ export const App = () => {
     await axios.delete(baseUrl + eventSelected.id)
     .then(response => {
       setData(data.filter(obj => obj.id !== eventSelected.id))
-    })
-  };
+  })};
 
   const selectEvent = (theEvent, mode) => {
     setEventSelected(theEvent);
@@ -91,6 +83,7 @@ export const App = () => {
   useEffect( () => getRequest(), [eventsPage] );
   useEffect( () => postRequest(), [postStatus] );
   useEffect( () => putRequest(), [putStatus]);
+
 
   return (
     <Router>

@@ -1,29 +1,45 @@
 .insert-data-formik {
-  background-color: #d4f3de;
   padding: 20px;
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .insert-data-formik__title {
-  margin-bottom: 30px;
-  font-size: 20px;
+  margin-bottom: 50px;
+  font-size: 26px;
   color: #254c25;
 }
 
 .insert-data-formik__field-div {
-  width: 90%;
+  width: calc(100vw - 45px);
   height: 65px;
 }
 
 .insert-data-formik__field {
   height: 30px;
-  width: calc(100vw - 77px);
+  width: calc(100vw - 53px);
   font-size: 18px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-left: 7px;
+  outline: none;
+}
+
+.insert-data-formik__field::placeholder {
+  color: #708a78;
 }
 
 .insert-data-formik__select {
   height: 35px;
-  width: calc(100vw - 57px);
+  width: calc(100vw - 45px);
   font-size: 18px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
 .insert-data-formik__error {
@@ -36,11 +52,48 @@
 
 .insert-data-formik__button {
   background-color: green;
-  width: 120px;
+  width: 100px;
   height: 40px;
   color: white;
   font-size: 16px;
   font-weight: 500;
   border-radius: 4px;
   margin-right: 20px;
+}
+
+.insert-data-formik__date-picker {
+  width: calc(100vw - 53px);
+  height: 35px;
+  font-size: 18px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-left: 7px;
+}
+
+.insert-data-formik__date-picker::placeholder {
+  color: #708a78;
+}
+
+.insert-data-formik__time-picker {
+  width: calc(100vw - 45px);
+  height: 40px;
+  font-size: 18px;
+}
+
+.rc-time-picker-input {
+  height: 38px;
+  font-size: 18px;
+}
+
+.rc-time-picker-input::placeholder {
+  color: #708a78;
+}
+
+.rc-time-picker-clear-icon:after {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.insert-data-formik__field:-internal-autofill-selected {
+  background-color: #ae5151 !important;
 }

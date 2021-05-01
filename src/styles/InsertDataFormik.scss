@@ -1,24 +1,39 @@
 .insert-data-formik {
-  background-color: rgb(212, 243, 222);
   padding: 20px;
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   &__title {
-    margin-bottom: 30px;
-    font-size: 20px;
+    margin-bottom: 50px;
+    font-size: 26px;
     color: rgb(37, 76, 37);
   }
   &__field-div {
-    width: 90%;
+    width: calc(#{100vw} - 45px);
     height: 65px;
   }
   &__field {
     height: 30px;
-    width: calc(#{100vw} - 77px);
+    width: calc(#{100vw} - 53px);
     font-size: 18px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 7px;
+    outline: none;
+    &::placeholder{
+      color: rgb(112, 138, 120);
+    }
   }
   &__select {
     height: 35px;
-    width: calc(#{100vw} - 57px);
+    width: calc(#{100vw} - 45px);
     font-size: 18px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 5px;
   }
   &__error {
     position: relative;
@@ -29,7 +44,7 @@
   }
   &__button {
     background-color: green;
-    width: 120px;
+    width: 100px;
     height: 40px;
     color: white;
     font-size: 16px;
@@ -37,4 +52,41 @@
     border-radius: 4px;
     margin-right: 20px;
   }
+  &__date-picker {
+    width: calc(#{100vw} - 53px);
+    height: 35px;
+    font-size: 18px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 7px;
+    &::placeholder{
+      color: rgb(112, 138, 120);
+    }
+  }
+  &__time-picker {
+    width: calc(#{100vw} - 45px);
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+.rc-time-picker-input {
+  height: 38px;
+  font-size: 18px;
+  &::placeholder {
+    color: rgb(112, 138, 120);
+  }
+}
+
+.rc-time-picker-clear-icon:after {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.insert-data-formik__field:-internal-autofill-selected {
+  background-color: rgb(174, 81, 81) !important;
+}
+
+@media only screen and (min-width: 1200px) {
+
 }
